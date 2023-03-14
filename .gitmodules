@@ -1,0 +1,3 @@
+[submodule "Assignment-03/pc/azure_func/azureFuntionsC2d"]
+	path = Assignment-03/pc/azure_func/azureFuntionsC2d
+	url = git@github.com:Bobo-bug-lab/azureFuntionsC2d.git
