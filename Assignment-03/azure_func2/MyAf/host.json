@@ -1,11 +1,26 @@
 {
-    "version": "2.0",
-    "logging": {
-        "applicationInsights": {
-            "samplingSettings": {
-                "isEnabled": true,
-                "excludedTypes": "Request"
-            }
-        }
+  "version": "2.0",
+  "logging": {
+    "applicationInsights": {
+      "samplingSettings": {
+        "isEnabled": true,
+        "excludedTypes": "Request"
+      }
     }
+  },
+  "extensions": {
+    "eventHubs": {
+      "maxEventBatchSize": 10,
+      "targetUnprocessedEventThreshold": 75,
+      "batchCheckpointFrequency": 1,
+      "prefetchCount": 300,
+      "transportType": "amqpWebSockets",
+      "webProxy": "https://proxyserver:8080",
+      "customEndpointAddress": "amqps://company.gateway.local",
+      "initialOffsetOptions": {
+        "type": "fromStart",
+        "enqueuedTimeUtc": ""
+      }
+    }
+  }
 }
