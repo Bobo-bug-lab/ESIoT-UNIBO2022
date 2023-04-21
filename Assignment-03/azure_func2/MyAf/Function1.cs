@@ -19,9 +19,9 @@ namespace MyAf
     public class Function1
     {
         private static readonly ServiceClient _serviceClient = ServiceClient.CreateFromConnectionString("HostName=bobofan-iothub.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=QcR4qbxQNdytJGwKCyib2MNeF+77HFv7I6GkbNCKfYc=");
-        private string sourceDeviceId;
-        private const string pcString = "HostName=bobofan-iothub.azure-devices.net;DeviceId=pc;SharedAccessKey=7erHmTK/12my6evlrkn8YJiHF3hDlrr6TkTFHN6EQh0=";
-        private const string espString = "HostName=bobofan-iothub.azure-devices.net;DeviceId=esp8266;SharedAccessKey=Peu+kM0TUssgYbd3Wra7vt9T0SBfZEeomQnLp8Z+6fw=";
+        private string sourceDeviceId, targetDeviceId;
+        //private const string pcString = "HostName=bobofan-iothub.azure-devices.net;DeviceId=pc;SharedAccessKey=7erHmTK/12my6evlrkn8YJiHF3hDlrr6TkTFHN6EQh0=";
+        //private const string espString = "HostName=bobofan-iothub.azure-devices.net;DeviceId=esp8266;SharedAccessKey=Peu+kM0TUssgYbd3Wra7vt9T0SBfZEeomQnLp8Z+6fw=";
 
         //private const string rednodeString;
 
@@ -30,25 +30,30 @@ namespace MyAf
         [FunctionName("Function1")]
         public async Task RunAsync([IoTHubTrigger("messages/events", Connection = "ConnectionString")] EventData message, ILogger log)
         {
-            
 
+            //log.LogInformation($"Azure functions start running... (routing messages through azure iot hub)");
             var sourceDeviceId = message.SystemProperties["iothub-connection-device-id"].ToString();
             var messageString = Encoding.UTF8.GetString(message.Body.Array);
             log.LogInformation($"C# function triggered to process a message: {messageString}");
             log.LogInformation($"Device ID: {sourceDeviceId}");
 
 
-            //switch (this.sourceDeviceId)
-            //{
-            //    case "esp":
-            //        Console.WriteLine("Monday");
-            //        break;
-            //    case 7:
-            //        Console.WriteLine("Sunday");
-            //        break;
-            //    default:
-            //        Console.WriteLine("Nothing");
-            //}
+            switch (sourceDeviceId)
+            {
+                case "esp8266":
+                    Console.WriteLine("Monday");
+                    // go to both PC and node-red
+                    break;
+                case "pc":
+                    Console.WriteLine("Sunday");
+                    break;
+                case "nodered":
+                    Console.WriteLine("Sunday");
+                    break;
+                default:
+                    log.LogInformation($"No valid input");
+                    break;
+            }
 
             try
             {
