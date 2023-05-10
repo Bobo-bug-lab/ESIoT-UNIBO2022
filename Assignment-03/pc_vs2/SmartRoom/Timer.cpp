@@ -7,7 +7,17 @@
 #include "Timer.h"
 using namespace std;
 
-    Timer::Timer() {}
+    static auto start_time = std::chrono::high_resolution_clock::now(); // 保存程序开始时间
+
+    unsigned long millis() {
+    auto current_time = std::chrono::high_resolution_clock::now();
+    return std::chrono::duration_cast<std::chrono::milliseconds>(current_time - start_time).count();
+    }
+    
+    Timer::Timer() {
+        this->frequency = 100;
+    }
+    
     void Timer::setupFreq(int freq) {
         this->frequency = freq;
     }
@@ -18,7 +28,7 @@ using namespace std;
         // wait for the next tick by sleeping for the remaining time
         auto now = std::chrono::high_resolution_clock::now();
         auto elapsed = std::chrono::duration_cast<std::chrono::microseconds>(now - m_start_time);
-        auto remaining = std::chrono::microseconds(1000000 / 100) - elapsed; // assuming 100 Hz frequency
+        auto remaining = std::chrono::microseconds(1000000 / this->frequency ) - elapsed; // assuming 100 Hz frequency
         if (remaining > std::chrono::microseconds::zero()) {
             std::this_thread::sleep_for(remaining);
         }

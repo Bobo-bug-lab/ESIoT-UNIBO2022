@@ -2,27 +2,44 @@
 //
 
 #include <iostream>
-#include "getC2Dms.h"
+#include "Scheduler.h"
+//#include "getC2Dms.h"
+#include "../Assignment-03/pc_vs2/SmartRoom/test/TestTask.h"
 
 using namespace std;
 
+Timer* timer;
+Scheduler* sched;
+
 void init_system() {
-
-
+    sched = new Scheduler;
+    timer = new Timer;
+    sched->init(100);
+    Task* t0 = new TestTask();
+    t0->init(100);
+    sched->addTask(t0);
+    timer->setupPeriod(50);
 }
+
 int main()
 {
-    const char* connectionString = "HostName=bobofan-iothub.azure-devices.net;DeviceId=pc;SharedAccessKey=7erHmTK/12my6evlrkn8YJiHF3hDlrr6TkTFHN6EQh0="; //IoT Hub connection string
+    init_system();
+    while(1){
+        timer->waitForNextTick();
+        sched->schedule();
+    }
 
-    cout << "Hello World!\n";
-    IoTHubDevice ioTHubDevice(connectionString);
+    //const char* connectionString = "HostName=bobofan-iothub.azure-devices.net;DeviceId=pc;SharedAccessKey=7erHmTK/12my6evlrkn8YJiHF3hDlrr6TkTFHN6EQh0="; //IoT Hub connection string
 
-    // Start receiving C2D messages
-    ioTHubDevice.start();
+    //cout << "Hello World!\n";
+    //IoTHubDevice ioTHubDevice(connectionString);
 
-    // Print the detect status and light value
-    cout << "Detect Status: " << ioTHubDevice.getDetectStatus() << endl;
-    cout << "Light Value: " << ioTHubDevice.getLightValue() << endl;
+    //// Start receiving C2D messages
+    //ioTHubDevice.startService();
+
+    //// Print the detect status and light value
+    //cout << "Detect Status: " << ioTHubDevice.getDetectStatus() << endl;
+    //cout << "Light Value: " << ioTHubDevice.getLightValue() << endl;
 
     return 0;
 }

@@ -21,5 +21,7 @@ public:
     int getCurrentHour();
 };
 
+unsigned long millis();
+
 #endif
 

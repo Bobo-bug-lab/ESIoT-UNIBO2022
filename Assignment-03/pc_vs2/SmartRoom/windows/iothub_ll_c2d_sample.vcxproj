@@ -177,19 +177,21 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\getC2Dms.cpp" />
     <ClCompile Include="..\Scheduler.cpp" />
     <ClCompile Include="..\SmartRoom.cpp" />
+    <ClCompile Include="..\test\Air.cpp" />
+    <ClCompile Include="..\test\Pir.cpp" />
+    <ClCompile Include="..\test\TestTask.cpp" />
     <ClCompile Include="..\Timer.cpp" />
     <ClCompile Include="..\timer_test.cpp" />
-    <ClCompile Include="SmartLightingTask.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\getC2Dms.h" />
     <ClInclude Include="..\Scheduler.h" />
     <ClInclude Include="..\Task.h" />
+    <ClInclude Include="..\test\Air.h" />
+    <ClInclude Include="..\test\Pir.h" />
+    <ClInclude Include="..\test\TestTask.h" />
     <ClInclude Include="..\Timer.h" />
-    <ClInclude Include="SmartLightingTask.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <Target Name="EnsureVcPkgPackageBuildImports" BeforeTargets="PrepareForBuild">
