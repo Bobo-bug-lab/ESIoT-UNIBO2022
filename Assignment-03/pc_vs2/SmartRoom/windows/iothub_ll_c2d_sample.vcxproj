@@ -177,6 +177,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\getC2Dms.cpp" />
     <ClCompile Include="..\Scheduler.cpp" />
     <ClCompile Include="..\SmartRoom.cpp" />
     <ClCompile Include="..\test\Air.cpp" />
@@ -186,6 +187,7 @@
     <ClCompile Include="..\timer_test.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\getC2Dms.h" />
     <ClInclude Include="..\Scheduler.h" />
     <ClInclude Include="..\Task.h" />
     <ClInclude Include="..\test\Air.h" />
