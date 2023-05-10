@@ -11,10 +11,7 @@
 #include "azure_c_shared_utility/shared_util_options.h"
 #include "iothubtransportmqtt.h"
 #include "parson.h"
-<<<<<<< HEAD
 #include "Timer.h"
-=======
->>>>>>> 2610b78aa3c8faebab2bdb1d468897abeb216883
 
 class IoTHubDevice {
 public:
@@ -26,11 +23,7 @@ public:
     int getDetectStatus();
     int getLightValue();
     bool g_continueRunning;
-<<<<<<< HEAD
     //void sync();
-=======
-    //virtual void sync();
->>>>>>> 2610b78aa3c8faebab2bdb1d468897abeb216883
     //long getLastSyncTime();
 
 protected:
