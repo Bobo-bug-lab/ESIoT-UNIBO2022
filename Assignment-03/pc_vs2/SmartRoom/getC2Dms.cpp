@@ -37,13 +37,21 @@
             (void)printf("Failure creating IotHub device. Hint: Check your connection string.\r\n");
         }
         else{
+<<<<<<< HEAD
 
+=======
+            
+>>>>>>> 2610b78aa3c8faebab2bdb1d468897abeb216883
             IoTHubDeviceClient_LL_SetOption(device_ll_handle, "keepalive", &keepAliveIntervalInSeconds);
 
             bool urlDecodeOn = true;
             (void)IoTHubDeviceClient_LL_SetOption(device_ll_handle, OPTION_AUTO_URL_ENCODE_DECODE, &urlDecodeOn);
         }
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> 2610b78aa3c8faebab2bdb1d468897abeb216883
     }
 
     void IoTHubDevice::sync(){
@@ -59,9 +67,15 @@
 
 
             } 
+<<<<<<< HEAD
 
     }
 
+=======
+            
+    }
+    
+>>>>>>> 2610b78aa3c8faebab2bdb1d468897abeb216883
 
 
     IOTHUB_DEVICE_CLIENT_LL_HANDLE IoTHubDevice::endService() {
@@ -178,4 +192,9 @@
 
     long IoTHubDevice::getLastSyncTime() {
         return lastTimeSync;
+<<<<<<< HEAD
     }
+=======
+    }
+
+>>>>>>> 2610b78aa3c8faebab2bdb1d468897abeb216883

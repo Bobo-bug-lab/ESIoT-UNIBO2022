@@ -42,6 +42,7 @@
             bool urlDecodeOn = true;
             (void)IoTHubDeviceClient_LL_SetOption(device_ll_handle, OPTION_AUTO_URL_ENCODE_DECODE, &urlDecodeOn);
         }
+        
     }
 
     IOTHUB_DEVICE_CLIENT_LL_HANDLE IoTHubDevice::sync(){
