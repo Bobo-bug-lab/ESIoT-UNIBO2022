@@ -21,6 +21,7 @@
     }
 
     void IoTHubDevice::startService() {
+        //this->lastTimeSync = 0;
         IOTHUB_CLIENT_TRANSPORT_PROVIDER protocol = MQTT_Protocol;
         int keepAliveIntervalInSeconds = 20;
 
@@ -31,8 +32,8 @@
         (void)printf("Creating IoTHub Device handle\r\n");
 
         // Create the iothub handle here
-        this->device_ll_handle = IoTHubDeviceClient_LL_CreateFromConnectionString(connectionString, protocol);
-        if (device_ll_handle == NULL)
+        this->device_ll_handle = IoTHubDeviceClient_LL_CreateFromConnectionString(this->connectionString, protocol);
+        if (this->device_ll_handle == NULL)
         {
             (void)printf("Failure creating IotHub device. Hint: Check your connection string.\r\n");
         }
@@ -48,7 +49,7 @@
 
     void IoTHubDevice::sync(){
 
-            if (IoTHubDeviceClient_LL_SetMessageCallback(this->device_ll_handle, receive_msg_callback_static, NULL) != IOTHUB_CLIENT_OK)
+            if (IoTHubDeviceClient_LL_SetMessageCallback(this->device_ll_handle, receive_msg_callback_static, this) != IOTHUB_CLIENT_OK)
             {
                 (void)printf("ERROR: IoTHubClient_LL_SetMessageCallback..........FAILED!\r\n");
             }
@@ -59,6 +60,7 @@
 
 
             } 
+            updateSyncTime(millis());
 
     }
 
@@ -129,11 +131,11 @@
                     }
                     else
                     {
-                        int detect_status = json_object_dotget_number(root, "detect_status");
-                        int light_value = json_object_dotget_number(root, "light_value");
+                        this->detectStatus = json_object_dotget_number(root, "detect_status");
+                        this->lightValue = json_object_dotget_number(root, "light_value");
 
-                        printf("detect_status: %d\r\n", detect_status);
-                        printf("light_value: %d\r\n", light_value);
+                        printf("detect_status: %d\r\n", this->detectStatus);
+                        printf("light_value: %d\r\n", this->lightValue);
                     }
 
                     json_value_free(json);
@@ -161,7 +163,7 @@
             printf("\tKey: %s Value: %s\r\n", property_value, property_key);
         }
 
-        updateSyncTime(millis());
+        //updateSyncTime(millis());
 
         return IOTHUBMESSAGE_ACCEPTED;
 

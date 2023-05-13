@@ -6,6 +6,7 @@
 //#include "getC2Dms.h"
 #include "../Assignment-03/pc_vs2/SmartRoom/test/TestTask.h"
 
+
 using namespace std;
 
 Timer* timer;

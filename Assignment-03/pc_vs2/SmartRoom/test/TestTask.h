@@ -1,8 +1,10 @@
 #pragma once
+#include <iostream>
 #include "../Task.h"
 #include "../Timer.h"
 #include "Pir.h"
 #include "Air.h"
+#include "../getC2Dms.h"
 
 //#include "GetC2Dms.h"
 
@@ -11,6 +13,7 @@ class TestTask : public Task {
 	//int pin_led, pin_pir, pin_light_sensor;
 	Air* air;
 	Pir* pir;
+	IoTHubDevice* IoTDevice;
 	//LightDetector* light_detector;
 	Timer* timer;
 	//bool manualControl;

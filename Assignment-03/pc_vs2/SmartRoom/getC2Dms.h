@@ -23,8 +23,7 @@ public:
     int getDetectStatus();
     int getLightValue();
     bool g_continueRunning;
-    //void sync();
-    //long getLastSyncTime();
+    long getLastSyncTime();
 
 protected:
     void updateSyncTime(long time);
@@ -36,8 +35,8 @@ private:
     int detectStatus = 0;
     int lightValue = 0;
     long lastTimeSync;
-    long getLastSyncTime();
     IOTHUB_DEVICE_CLIENT_LL_HANDLE device_ll_handle;
+    
     //size_t g_message_recv_count;
 
 };

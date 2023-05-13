@@ -20,8 +20,6 @@ namespace MyAf
     {
         private static readonly ServiceClient _serviceClient = ServiceClient.CreateFromConnectionString("HostName=bobofan-iothub.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=QcR4qbxQNdytJGwKCyib2MNeF+77HFv7I6GkbNCKfYc=");
         private string sourceDeviceId, targetDeviceId;
-        //private const string pcString = "HostName=bobofan-iothub.azure-devices.net;DeviceId=pc;SharedAccessKey=7erHmTK/12my6evlrkn8YJiHF3hDlrr6TkTFHN6EQh0=";
-        //private const string espString = "HostName=bobofan-iothub.azure-devices.net;DeviceId=esp8266;SharedAccessKey=Peu+kM0TUssgYbd3Wra7vt9T0SBfZEeomQnLp8Z+6fw=";
 
         //private const string rednodeString;
 
