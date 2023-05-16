@@ -5,6 +5,7 @@
 #include "Scheduler.h"
 //#include "getC2Dms.h"
 #include "../Assignment-03/pc_vs2/SmartRoom/test/TestTask.h"
+#include "LightTask.h"
 
 
 using namespace std;
@@ -16,7 +17,10 @@ void init_system() {
     sched = new Scheduler;
     timer = new Timer;
     sched->init(100);
-    Task* t0 = new TestTask();
+    // Task* t0 = new TestTask();
+    // t0->init(100);
+    // sched->addTask(t0);
+    Task* t0 = new LightTask();
     t0->init(100);
     sched->addTask(t0);
     timer->setupPeriod(50);

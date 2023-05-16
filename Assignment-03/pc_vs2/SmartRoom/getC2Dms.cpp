@@ -79,7 +79,7 @@
         return this->device_ll_handle;
     }
 
-    int IoTHubDevice::getDetectStatus() {
+    bool IoTHubDevice::getDetectStatus() {
         return this->detectStatus;
     }
     int IoTHubDevice::getLightValue() {
@@ -133,9 +133,10 @@
                     {
                         this->detectStatus = json_object_dotget_number(root, "detect_status");
                         this->lightValue = json_object_dotget_number(root, "light_value");
+                        printf("Received Message\r\nMessage ID: %s\r\n Correlation ID: %s\r\n Data: <<<%s>>>\r\n", messageId, correlationId, (char*)buff_msg);
 
-                        printf("detect_status: %d\r\n", this->detectStatus);
-                        printf("light_value: %d\r\n", this->lightValue);
+                        //printf("detect_status: %d\r\n", this->detectStatus);
+                        //printf("light_value: %d\r\n", this->lightValue);
                     }
 
                     json_value_free(json);

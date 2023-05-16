@@ -39,14 +39,15 @@ namespace MyAf
             switch (sourceDeviceId)
             {
                 case "esp8266":
-                    Console.WriteLine("Monday");
+                    targetDeviceId = "pc";
+                    //Console.WriteLine("Monday");
                     // go to both PC and node-red
                     break;
                 case "pc":
-                    Console.WriteLine("Sunday");
+                    targetDeviceId = "node-red";
                     break;
-                case "nodered":
-                    Console.WriteLine("Sunday");
+                case "node-red":
+                    targetDeviceId = "pc";
                     break;
                 default:
                     log.LogInformation($"No valid input");
@@ -55,7 +56,7 @@ namespace MyAf
 
             try
             {
-                string targetDeviceId = "pc";
+
                 var c2dMessage = new Message(Encoding.ASCII.GetBytes(messageString));
 
                 // Send the message to the device with the corresponding device ID

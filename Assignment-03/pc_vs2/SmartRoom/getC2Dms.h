@@ -20,7 +20,7 @@ public:
     void sync();
     IOTHUB_DEVICE_CLIENT_LL_HANDLE endService();
     //IOTHUB_DEVICE_CLIENT_LL_HANDLE sync();
-    int getDetectStatus();
+    bool getDetectStatus();
     int getLightValue();
     bool g_continueRunning;
     long getLastSyncTime();
@@ -32,7 +32,7 @@ private:
     const char* connectionString;
     IOTHUBMESSAGE_DISPOSITION_RESULT receive_msg_callback(IOTHUB_MESSAGE_HANDLE message, void* user_context);
     static IOTHUBMESSAGE_DISPOSITION_RESULT receive_msg_callback_static(IOTHUB_MESSAGE_HANDLE message, void* user_context);
-    int detectStatus = 0;
+    bool detectStatus = 0;
     int lightValue = 0;
     long lastTimeSync;
     IOTHUB_DEVICE_CLIENT_LL_HANDLE device_ll_handle;

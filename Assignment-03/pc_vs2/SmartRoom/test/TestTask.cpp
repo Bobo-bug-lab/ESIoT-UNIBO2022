@@ -23,6 +23,7 @@ void TestTask::tick() {
     //pir->sync();
     //air->sync();
     IoTDevice->sync();
+    cout << "Current Hour: " << timer->getCurrentHour() << endl;
     cout << "Detect Status: " << IoTDevice->getDetectStatus() << endl;
     cout << "Light Value: " << IoTDevice->getLightValue() << endl;
 
