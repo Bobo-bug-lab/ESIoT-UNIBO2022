@@ -85,6 +85,16 @@
     int IoTHubDevice::getLightValue() {
         return this->lightValue;
     }
+    bool IoTHubDevice::getDashboardSwitch() {
+        return this->dashboardSwitch;
+    }
+    bool IoTHubDevice::getLightSwitchNode() {
+        return this->lightSwitchNode;
+    }
+    int IoTHubDevice::getRollerSliderValueNode() {
+        return this->rollerSliderNode;
+    }
+
     IOTHUBMESSAGE_DISPOSITION_RESULT IoTHubDevice::receive_msg_callback(IOTHUB_MESSAGE_HANDLE message, void* user_context)
     {
         (void)user_context;
@@ -131,10 +141,21 @@
                     }
                     else
                     {
-                        this->detectStatus = json_object_dotget_number(root, "detect_status");
-                        this->lightValue = json_object_dotget_number(root, "light_value");
+
                         printf("Received Message\r\nMessage ID: %s\r\n Correlation ID: %s\r\n Data: <<<%s>>>\r\n", messageId, correlationId, (char*)buff_msg);
 
+                        if(strcmp(correlationId, "esp8266") == 0){
+                            this->detectStatus = json_object_dotget_number(root, "detect_status");
+                            this->lightValue = json_object_dotget_number(root, "light_value");
+                        }
+                        else if(strcmp(correlationId, "node-red") == 0){
+                            this->dashboardSwitch = json_object_dotget_boolean(root, "dashboardSwitch");
+                            this->lightSwitchNode = json_object_dotget_boolean(root, "lightSwitch");
+                            this->rollerSliderNode = json_object_dotget_number(root, "rollerSlider");                            
+                        }
+                        else{
+                            (void)printf("Unknown message source! Correlation ID: %s\r\n", correlationId);
+                        }
                         //printf("detect_status: %d\r\n", this->detectStatus);
                         //printf("light_value: %d\r\n", this->lightValue);
                     }

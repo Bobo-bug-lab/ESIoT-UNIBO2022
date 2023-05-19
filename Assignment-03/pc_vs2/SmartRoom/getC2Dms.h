@@ -22,6 +22,9 @@ public:
     //IOTHUB_DEVICE_CLIENT_LL_HANDLE sync();
     bool getDetectStatus();
     int getLightValue();
+    bool getDashboardSwitch();
+    bool getLightSwitchNode();
+    int getRollerSliderValueNode();
     bool g_continueRunning;
     long getLastSyncTime();
 
@@ -34,6 +37,9 @@ private:
     static IOTHUBMESSAGE_DISPOSITION_RESULT receive_msg_callback_static(IOTHUB_MESSAGE_HANDLE message, void* user_context);
     bool detectStatus = 0;
     int lightValue = 0;
+    bool dashboardSwitch = 0;
+    bool lightSwitchNode = 0;
+    int rollerSliderNode = 0;
     long lastTimeSync;
     IOTHUB_DEVICE_CLIENT_LL_HANDLE device_ll_handle;
     

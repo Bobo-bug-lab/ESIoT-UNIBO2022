@@ -40,7 +40,6 @@ namespace MyAf
             {
                 case "esp8266":
                     targetDeviceId = "pc";
-                    //Console.WriteLine("Monday");
                     // go to both PC and node-red
                     break;
                 case "pc":
@@ -59,8 +58,18 @@ namespace MyAf
 
                 var c2dMessage = new Message(Encoding.ASCII.GetBytes(messageString));
 
+                // 设置 Correlation ID
+                //c2dMessage.Properties["correlationId"] = sourceDeviceId;
+
+                // 将 Correlation ID 设置为当前消息的 Correlation ID
+                c2dMessage.CorrelationId = sourceDeviceId;
+
                 // Send the message to the device with the corresponding device ID
                 await _serviceClient.SendAsync(targetDeviceId, c2dMessage);
+                if (sourceDeviceId == "esp8266")
+                {
+                    await _serviceClient.SendAsync("node-red", c2dMessage);
+                }
 
                 log.LogInformation($"C2D message sent to device with ID: {targetDeviceId}");
             }
