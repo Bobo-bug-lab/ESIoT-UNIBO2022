@@ -2,10 +2,11 @@
 //
 
 #include <iostream>
+#include <windows.h>
 #include "Scheduler.h"
 //#include "getC2Dms.h"
 #include "../Assignment-03/pc_vs2/SmartRoom/test/TestTask.h"
-#include "LightTask.h"
+#include "IotTask.h"
 
 
 using namespace std;
@@ -20,7 +21,7 @@ void init_system() {
     // Task* t0 = new TestTask();
     // t0->init(100);
     // sched->addTask(t0);
-    Task* t0 = new LightTask();
+    Task* t0 = new IotTask();
     t0->init(100);
     sched->addTask(t0);
     timer->setupPeriod(50);

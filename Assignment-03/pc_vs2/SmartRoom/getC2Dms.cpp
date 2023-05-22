@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <iostream>
 
 #include "iothub.h"
 #include "iothub_device_client_ll.h"
@@ -12,12 +13,15 @@
 #include "getC2Dms.h"
 #include "Timer.h"
 
+struct DataForLight dataforlight;
 
     IoTHubDevice::IoTHubDevice(const char* connectionString) {
         // Save the connection string
         this->connectionString = connectionString;
         //this->g_message_recv_count = 0;
         this->g_continueRunning = 1;
+        this->dashboardSwitch = false;
+        this->lightSwitchNode = false;
     }
 
     void IoTHubDevice::startService() {
@@ -29,7 +33,7 @@
 
         //IOTHUB_DEVICE_CLIENT_LL_HANDLE device_ll_handle;
 
-        (void)printf("Creating IoTHub Device handle\r\n");
+        (void)printf("Creating IoTHub Device handle for receiving msg.......\r\n");
 
         // Create the iothub handle here
         this->device_ll_handle = IoTHubDeviceClient_LL_CreateFromConnectionString(this->connectionString, protocol);
@@ -149,8 +153,16 @@
                             this->lightValue = json_object_dotget_number(root, "light_value");
                         }
                         else if(strcmp(correlationId, "node-red") == 0){
-                            this->dashboardSwitch = json_object_dotget_boolean(root, "dashboardSwitch");
-                            this->lightSwitchNode = json_object_dotget_boolean(root, "lightSwitch");
+                            if(json_object_dotget_boolean(root, "dashboardSwitch") == true){
+                                this->dashboardSwitch = true;
+                            }
+                            else this->dashboardSwitch = false;
+                            if(json_object_dotget_boolean(root, "lightSwitch") == true){
+                                this->lightSwitchNode = true;
+                            }
+                            else this->lightSwitchNode = false;
+                            //this->dashboardSwitch = json_object_dotget_boolean(root, "dashboardSwitch");
+                            //this->lightSwitchNode = json_object_dotget_boolean(root, "lightSwitch");
                             this->rollerSliderNode = json_object_dotget_number(root, "rollerSlider");                            
                         }
                         else{
@@ -158,6 +170,12 @@
                         }
                         //printf("detect_status: %d\r\n", this->detectStatus);
                         //printf("light_value: %d\r\n", this->lightValue);
+
+                            std::cout << "Detect Status: " << this->getDetectStatus() << std::endl;
+                            std::cout << "Light Value: " << this->getLightValue() << std::endl;
+                            std::cout << "dashboardSwitch: " << this->getDashboardSwitch() << std::endl;
+                            std::cout << "lightSwitch: " << this->getLightSwitchNode() << std::endl;
+                            std::cout << "rollerSlider: " << this->getRollerSliderValueNode() << std::endl;
                     }
 
                     json_value_free(json);
@@ -202,4 +220,15 @@
 
     long IoTHubDevice::getLastSyncTime() {
         return lastTimeSync;
+    }
+
+    void IoTHubDevice::setDataForLight(){
+        dataforlight.dashboardSwitch = this->getDashboardSwitch();
+        dataforlight.detectStatus = this->getDetectStatus();
+        dataforlight.lightSwitchNode = this->getLightSwitchNode();
+        dataforlight.lightValue = this->getLightValue();
+    }
+
+    struct DataForLight getDataForLight(){
+        return dataforlight;
     }

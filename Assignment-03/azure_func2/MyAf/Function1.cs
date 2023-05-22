@@ -42,7 +42,7 @@ namespace MyAf
                     targetDeviceId = "pc";
                     // go to both PC and node-red
                     break;
-                case "pc":
+                case "pcsend":
                     targetDeviceId = "node-red";
                     break;
                 case "node-red":

@@ -178,8 +178,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\getC2Dms.cpp" />
-    <ClCompile Include="..\LightTask.cpp" />
+    <ClCompile Include="..\IotTask.cpp" />
     <ClCompile Include="..\Scheduler.cpp" />
+    <ClCompile Include="..\sendD2Cms.cpp" />
     <ClCompile Include="..\SmartRoom.cpp" />
     <ClCompile Include="..\test\Air.cpp" />
     <ClCompile Include="..\test\Pir.cpp" />
@@ -189,8 +190,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\getC2Dms.h" />
-    <ClInclude Include="..\LightTask.h" />
+    <ClInclude Include="..\IotTask.h" />
     <ClInclude Include="..\Scheduler.h" />
+    <ClInclude Include="..\sendD2Cms.h" />
     <ClInclude Include="..\Task.h" />
     <ClInclude Include="..\test\Air.h" />
     <ClInclude Include="..\test\Pir.h" />
