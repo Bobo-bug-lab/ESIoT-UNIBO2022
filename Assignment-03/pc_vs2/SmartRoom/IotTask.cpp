@@ -24,10 +24,10 @@ void IotTask::tick() {
     //cout << "Detect Status: " << IoTDevice->getDetectStatus() << endl;
     //cout << "Light Value: " << IoTDevice->getLightValue() << endl; 这两个来自esp
 
-    //cout << "dashboardSwitch: " << IoTDevice->getDashboardSwitch() << endl; 来自
-    //Node cout << "lightSwitch: " << IoTDevice->getLightSwitchNode() << endl;
+    //cout << "dashboardSwitch: " << IoTDevice->getDashboardSwitch() << endl; 来自node-red
+    //cout << "lightSwitch: " << IoTDevice->getLightSwitchNode() << endl;
 
-    //Node cout << "rollerSlider: " << IoTDevice->getRollerSliderValueNode() << endl;
+    //cout << "rollerSlider: " << IoTDevice->getRollerSliderValueNode() << endl;
 
     
 }

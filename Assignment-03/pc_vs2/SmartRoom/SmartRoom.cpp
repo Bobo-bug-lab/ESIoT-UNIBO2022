@@ -5,8 +5,10 @@
 #include <windows.h>
 #include "Scheduler.h"
 //#include "getC2Dms.h"
-#include "../Assignment-03/pc_vs2/SmartRoom/test/TestTask.h"
+//#include "../Assignment-03/pc_vs2/SmartRoom/test/TestTask.h"
 #include "IotTask.h"
+#include "LightTask.h"
+#include "RollerTask.h"
 
 
 using namespace std;
@@ -18,12 +20,15 @@ void init_system() {
     sched = new Scheduler;
     timer = new Timer;
     sched->init(100);
-    // Task* t0 = new TestTask();
-    // t0->init(100);
-    // sched->addTask(t0);
     Task* t0 = new IotTask();
+    Task* t1 = new LightTask();
+    Task* t2 = new RollerTask();
     t0->init(100);
     sched->addTask(t0);
+    t1->init(100);
+    sched->addTask(t1);
+    t2->init(100);
+    sched->addTask(t2);
     timer->setupPeriod(50);
 }
 
@@ -34,18 +39,6 @@ int main()
         timer->waitForNextTick();
         sched->schedule();
     }
-
-    //const char* connectionString = "HostName=bobofan-iothub.azure-devices.net;DeviceId=pc;SharedAccessKey=7erHmTK/12my6evlrkn8YJiHF3hDlrr6TkTFHN6EQh0="; //IoT Hub connection string
-
-    //cout << "Hello World!\n";
-    //IoTHubDevice ioTHubDevice(connectionString);
-
-    //// Start receiving C2D messages
-    //ioTHubDevice.startService();
-
-    //// Print the detect status and light value
-    //cout << "Detect Status: " << ioTHubDevice.getDetectStatus() << endl;
-    //cout << "Light Value: " << ioTHubDevice.getLightValue() << endl;
 
     return 0;
 }

@@ -36,30 +36,34 @@ private:
     IOTHUBMESSAGE_DISPOSITION_RESULT receive_msg_callback(IOTHUB_MESSAGE_HANDLE message, void* user_context);
     static IOTHUBMESSAGE_DISPOSITION_RESULT receive_msg_callback_static(IOTHUB_MESSAGE_HANDLE message, void* user_context);
     bool detectStatus = 0;
-    int lightValue = 0;
+    double lightValue = 0;
     bool dashboardSwitch = 0;
     bool lightSwitchNode = 0;
     int rollerSliderNode = 0;
     long lastTimeSync;
     IOTHUB_DEVICE_CLIENT_LL_HANDLE device_ll_handle;  
     void setDataForLight();
+    //void setDataForRoller();
     //size_t g_message_recv_count;
 
 };
 
 struct DataForLight getDataForLight();
+//struct DataForRoller getDataForRoller();
 
 struct DataForLight {
     bool detectStatus = 0;
     int lightValue = 0;
     bool dashboardSwitch = 0;
     int lightSwitchNode = 0;
-};
-
-struct DataForRoller {
-    bool detectStatus = 0;
     int rollerSliderValueNode = 0;
 };
+
+// struct DataForRoller {
+//     bool detectStatus = 0;
+//     bool dashboardSwitch = 0;
+//     int rollerSliderValueNode = 0;
+// };
     //cout << "Detect Status: " << IoTDevice->getDetectStatus() << endl;
     //cout << "Light Value: " << IoTDevice->getLightValue() << endl; 这两个来自esp
 

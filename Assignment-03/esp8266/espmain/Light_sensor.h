@@ -5,8 +5,7 @@
 class Light_sensor{ 
 public:
   Light_sensor(int pin);
-  //void lightSensorSetup();
-  int getLightLevel();    
+  double getLightLevel();    
 private:
   int pin;  
 };

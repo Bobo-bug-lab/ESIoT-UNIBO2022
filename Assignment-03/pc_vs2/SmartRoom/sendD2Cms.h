@@ -13,6 +13,7 @@
 #include "parson.h"
 #include "Timer.h"
 
+
 class IoTHubDeviceSend {
 public:
     IoTHubDeviceSend (const char* connectionString);

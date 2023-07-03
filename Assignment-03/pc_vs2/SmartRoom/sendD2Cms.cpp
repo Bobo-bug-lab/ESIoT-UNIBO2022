@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <iostream>
 
 #include "iothub.h"
 #include "iothub_device_client_ll.h"
@@ -11,7 +12,9 @@
 #include "parson.h"
 #include "sendD2Cms.h"
 #include "Timer.h"
+#include "LightTask.h"
 
+    DataForNode data;
 
     IoTHubDeviceSend::IoTHubDeviceSend(const char* connectionString) {
         this->connectionString = connectionString;
@@ -46,8 +49,10 @@
     }
 
     void IoTHubDeviceSend::sync(){
-            this->rollerStatus++;
-            sendD2CMessage(this->lightStatus, this->rollerStatus);
+            //this->rollerStatus++;
+            data = getDataForNode();
+            std::cout << "lightStatus on send: " << data.lightStatus << std::endl;
+            sendD2CMessage(data.lightStatus, data.rollerStatus);
             updateSyncTime(millis());
 
     }
@@ -93,13 +98,7 @@
             return;
         }
 
-        // Set the message properties
-        // if (IoTHubMessage_SetMessageId(message_handle, "message_id") != IOTHUB_MESSAGE_OK)
-        // {
-        //     printf("Failed to set message id\n");
-        // }
-
-        if (IoTHubMessage_SetCorrelationId(message_handle, "PC") != IOTHUB_MESSAGE_OK)
+        if (IoTHubMessage_SetCorrelationId(message_handle, "pcsend") != IOTHUB_MESSAGE_OK)
         {
             printf("Failed to set correlation id\n");
         }
@@ -112,7 +111,7 @@
         const int maxRetryCount = 3;
         do {
             IoTHubDeviceClient_LL_DoWork(this->device_ll_handle);
-            ThreadAPI_Sleep(50);  // 等待一段时间，以便消息有机会发送
+            ThreadAPI_Sleep(100);  // 等待一段时间，以便消息有机会发送
             retryCount++;
         } while (retryCount <= maxRetryCount);
 
@@ -147,3 +146,5 @@
             (void)printf("The device client has been disconnected\r\n");
         }
     }
+    
+    

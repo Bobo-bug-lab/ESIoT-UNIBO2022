@@ -47,13 +47,14 @@
 // Additional sample headers
 #include "iot_configs.h"
 #include "Light_sensor.h"
+#include "Led.h"
+#include "Pir.h"
 
 // When developing for your own Arduino-based platform,
 // please follow the format '(ard;<platform>)'.
 #define AZURE_SDK_CLIENT_USER_AGENT "c%2F" AZ_SDK_VERSION_STRING "(ard;esp8266)"
 
 // Utility macros and defines
-#define LED_PIN 2
 #define sizeofarray(a) (sizeof(a) / sizeof(a[0]))
 #define ONE_HOUR_IN_SECS 3600
 #define NTP_SERVERS "pool.ntp.org", "time.nist.gov"
@@ -61,10 +62,15 @@
 
 // Define pins for sensors
 #define PIN_PIR D2
+#define PIN_LED D0
 #define PIN_LIGHT_SENSOR A0
 
 static Light_sensor* light_sensor;
-static int light_value=0,detect=0;
+static Pir* pir;
+static Led* led;
+//static int light_value=0,detect=0;
+static bool detect=0;
+static double light_value=0;
 
 // Translate iot_configs.h defines into variables used by the sample
 static const char* ssid = IOT_CONFIG_WIFI_SSID;
@@ -308,7 +314,6 @@ static void establishConnection()
     connectToAzureIoTHub();
   }
 
-  digitalWrite(LED_PIN, LOW);
 }
 
 static char* getTelemetryPayload()
@@ -335,13 +340,16 @@ static char* getTelemetryPayload()
 
 static void sendTelemetry()
 {
-  digitalWrite(LED_PIN, HIGH);
   Serial.print(millis());
   Serial.println(" ESP8266 Sending telemetry . . . ");
    light_value = light_sensor->getLightLevel();
-   detect = digitalRead(PIN_PIR);
+   detect = pir->getPir();
    Serial.println("detect_status: ");
    Serial.println(detect);
+   if(detect){
+    led->switchOn();
+   }
+   else led->switchOff();
    Serial.println("light_value: ");
    Serial.println(light_value);
   if (az_result_failed(az_iot_hub_client_telemetry_get_publish_topic(
@@ -354,7 +362,6 @@ static void sendTelemetry()
   mqtt_client.publish(telemetry_topic, getTelemetryPayload(), false);
   Serial.println("OK");
   delay(100);
-  digitalWrite(LED_PIN, LOW);
 }
 
 // Arduino setup and loop main functions.
@@ -362,9 +369,8 @@ static void sendTelemetry()
 void setup()
 {
   light_sensor = new Light_sensor(PIN_LIGHT_SENSOR);
-  pinMode(PIN_PIR, INPUT_PULLUP);
-  pinMode(LED_PIN, OUTPUT);
-  digitalWrite(LED_PIN, HIGH);
+  led = new Led(PIN_LED);
+  pir = new Pir(PIN_PIR);
   establishConnection();
   
 }

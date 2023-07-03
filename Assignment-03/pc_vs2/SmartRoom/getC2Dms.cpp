@@ -14,6 +14,7 @@
 #include "Timer.h"
 
 struct DataForLight dataforlight;
+//struct DataForRoller dataforroller;
 
     IoTHubDevice::IoTHubDevice(const char* connectionString) {
         // Save the connection string
@@ -52,7 +53,7 @@ struct DataForLight dataforlight;
     }
 
     void IoTHubDevice::sync(){
-
+            setDataForLight();
             if (IoTHubDeviceClient_LL_SetMessageCallback(this->device_ll_handle, receive_msg_callback_static, this) != IOTHUB_CLIENT_OK)
             {
                 (void)printf("ERROR: IoTHubClient_LL_SetMessageCallback..........FAILED!\r\n");
@@ -227,6 +228,7 @@ struct DataForLight dataforlight;
         dataforlight.detectStatus = this->getDetectStatus();
         dataforlight.lightSwitchNode = this->getLightSwitchNode();
         dataforlight.lightValue = this->getLightValue();
+        dataforlight.rollerSliderValueNode = this->getRollerSliderValueNode();
     }
 
     struct DataForLight getDataForLight(){

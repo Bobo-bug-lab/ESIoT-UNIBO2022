@@ -10,8 +10,9 @@ Light_sensor::Light_sensor(int pin){
 
 
 
-int Light_sensor::getLightLevel(){
+double Light_sensor::getLightLevel(){
     int light = analogRead(pin);
-    return light;
+    double value = ((double) light) * 100/1023;
+    return value;
 
 };
