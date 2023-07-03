@@ -1,0 +1,582 @@
+[
+    {
+        "id": "9fb621d8b4c2dd02",
+        "type": "tab",
+        "label": "Bobo Cloud Room",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "6d7755617c0783aa",
+        "type": "ui_switch",
+        "z": "9fb621d8b4c2dd02",
+        "name": "",
+        "label": "switch for lights control",
+        "tooltip": "",
+        "group": "d6e62d9ad3927827",
+        "order": 4,
+        "width": 6,
+        "height": 1,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "sliderValue",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 520,
+        "y": 220,
+        "wires": [
+            [
+                "a0bee660b5232cb2"
+            ]
+        ]
+    },
+    {
+        "id": "01bd020bee05ae61",
+        "type": "ui_slider",
+        "z": "9fb621d8b4c2dd02",
+        "name": "",
+        "label": "slider for roller control",
+        "tooltip": "",
+        "group": "d6e62d9ad3927827",
+        "order": 5,
+        "width": 6,
+        "height": 1,
+        "passthru": true,
+        "outs": "all",
+        "topic": "lightSwitch",
+        "topicType": "msg",
+        "min": 0,
+        "max": "100",
+        "step": 1,
+        "className": "",
+        "x": 520,
+        "y": 160,
+        "wires": [
+            [
+                "7d413f946c643c16"
+            ]
+        ]
+    },
+    {
+        "id": "2cf027ae9e824a3f",
+        "type": "azureiotdevice",
+        "z": "9fb621d8b4c2dd02",
+        "deviceid": "node-red",
+        "pnpModelid": "",
+        "connectiontype": "constr",
+        "authenticationmethod": "sas",
+        "iothub": "bobofan-iothub.azure-devices.net",
+        "isIotcentral": false,
+        "scopeid": "",
+        "enrollmenttype": "group",
+        "saskey": "HostName=bobofan-iothub.azure-devices.net;DeviceId=node-red;SharedAccessKey=vt25TuTsR6vR2QXeF12LyNtdmYqLg2WWQervdjhqIfU=",
+        "certname": "",
+        "keyname": "",
+        "passphrase": "",
+        "protocol": "mqtt",
+        "methods": [],
+        "DPSpayload": "",
+        "gatewayHostname": "",
+        "caname": "",
+        "cert": "",
+        "key": "",
+        "ca": "",
+        "x": 470,
+        "y": 520,
+        "wires": [
+            [
+                "61c007bffe631f7b",
+                "b04844809e2e60ae"
+            ]
+        ]
+    },
+    {
+        "id": "61c007bffe631f7b",
+        "type": "debug",
+        "z": "9fb621d8b4c2dd02",
+        "name": "Log",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 890,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "0771e2e231ef3a67",
+        "type": "debug",
+        "z": "9fb621d8b4c2dd02",
+        "name": "LogValue",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 840,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "a5703751b63e7a7d",
+        "type": "function",
+        "z": "9fb621d8b4c2dd02",
+        "name": "lightStatusFunction",
+        "func": "\nmsg.payload = msg.payload.data.lightStatus;\nmsg.topic = \"lightStatus\";\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 870,
+        "y": 280,
+        "wires": [
+            [
+                "27dca0aa2e676705",
+                "c8c052a00b2d735b",
+                "111e28455fb674f2"
+            ]
+        ]
+    },
+    {
+        "id": "9c81c3900369785e",
+        "type": "debug",
+        "z": "9fb621d8b4c2dd02",
+        "name": "TimeLog",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1360,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "b04844809e2e60ae",
+        "type": "json",
+        "z": "9fb621d8b4c2dd02",
+        "name": "",
+        "property": "payload.data",
+        "action": "obj",
+        "pretty": false,
+        "x": 670,
+        "y": 360,
+        "wires": [
+            [
+                "a5703751b63e7a7d",
+                "0771e2e231ef3a67",
+                "1e5bb77026a2fe1f",
+                "d52360e6b619f153"
+            ]
+        ]
+    },
+    {
+        "id": "1e5bb77026a2fe1f",
+        "type": "function",
+        "z": "9fb621d8b4c2dd02",
+        "name": "rollerStatusFunction",
+        "func": "\nmsg.payload = msg.payload.data.rollerStatus;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 880,
+        "y": 400,
+        "wires": [
+            [
+                "bd7a827067560ef1"
+            ]
+        ]
+    },
+    {
+        "id": "d793c4ec3bd0fc58",
+        "type": "function",
+        "z": "9fb621d8b4c2dd02",
+        "name": "Generate Time",
+        "func": "if (msg.payload === 1){\n    \n}\n\nvar currentDate = new Date();\nvar year = currentDate.getFullYear();\nvar month = currentDate.getMonth() + 1;\nvar day = currentDate.getDate();\nvar time = currentDate.toLocaleTimeString();\n\nvar time_now = year + '-' + month + '-' + day + ' ' + time;\n\n\nmsg.payload = time_now;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1040,
+        "y": 40,
+        "wires": [
+            [
+                "64349ae5629946f3"
+            ]
+        ]
+    },
+    {
+        "id": "64349ae5629946f3",
+        "type": "ui_text",
+        "z": "9fb621d8b4c2dd02",
+        "group": "d6e62d9ad3927827",
+        "order": 3,
+        "width": 6,
+        "height": 1,
+        "name": "",
+        "label": "Current Time",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 1410,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "d52360e6b619f153",
+        "type": "function",
+        "z": "9fb621d8b4c2dd02",
+        "name": "lightValueFunction",
+        "func": "\nmsg.payload = msg.payload.data.light_value;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 870,
+        "y": 340,
+        "wires": [
+            [
+                "5da2914d7f6f214e"
+            ]
+        ]
+    },
+    {
+        "id": "5da2914d7f6f214e",
+        "type": "ui_gauge",
+        "z": "9fb621d8b4c2dd02",
+        "name": "",
+        "group": "d6e62d9ad3927827",
+        "order": 8,
+        "width": 6,
+        "height": 4,
+        "gtype": "gage",
+        "title": "Light Value",
+        "label": "",
+        "format": "{{msg.payload.light_value}}",
+        "min": "0",
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#592ef5"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 1150,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "b6c1492539e7bc54",
+        "type": "ui_switch",
+        "z": "9fb621d8b4c2dd02",
+        "name": "",
+        "label": "switch for dashboard control",
+        "tooltip": "",
+        "group": "d6e62d9ad3927827",
+        "order": 1,
+        "width": 12,
+        "height": 2,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "dashboardSwitch",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 500,
+        "y": 100,
+        "wires": [
+            [
+                "a3b728be5cbdbd1c"
+            ]
+        ]
+    },
+    {
+        "id": "27dca0aa2e676705",
+        "type": "function",
+        "z": "9fb621d8b4c2dd02",
+        "name": "lightTimeFunction",
+        "func": "var time = context.global.get('time');\nvar lightStatus = msg.payload;\nvar currentDate = new Date();\n//currentDate.toLocaleTimeString()\nif (lightStatus == 1 && time == \"N/A\")\n{\n\n    time = currentDate.toLocaleTimeString();\n    context.global.set('time', time);\n    //msg.payload = \"The light started since \" + time;\n\n}\nelse if (lightStatus == 0)\n{\n    time = \"N/A\";\n    context.global.set('time', time);\n    //msg.payload = time;\n    //return 0;\n}\n\nmsg.payload = \"The light started since \" + time;\n\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1170,
+        "y": 220,
+        "wires": [
+            [
+                "9c81c3900369785e",
+                "f2067e1718e7c33b"
+            ]
+        ]
+    },
+    {
+        "id": "46eb2ed715eb032f",
+        "type": "inject",
+        "z": "9fb621d8b4c2dd02",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "5",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "currentTime",
+        "payload": "",
+        "payloadType": "date",
+        "x": 160,
+        "y": 40,
+        "wires": [
+            [
+                "d793c4ec3bd0fc58",
+                "de589eddbd640cf0"
+            ]
+        ]
+    },
+    {
+        "id": "f2067e1718e7c33b",
+        "type": "ui_text",
+        "z": "9fb621d8b4c2dd02",
+        "group": "d6e62d9ad3927827",
+        "order": 2,
+        "width": 6,
+        "height": 1,
+        "name": "",
+        "label": "Light Time",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 1410,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "d83d4f251fc44a6b",
+        "type": "debug",
+        "z": "9fb621d8b4c2dd02",
+        "name": "InputFuncLog",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 620,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "a3b728be5cbdbd1c",
+        "type": "function",
+        "z": "9fb621d8b4c2dd02",
+        "name": "SetDashboardContorl",
+        "func": "global.set(\"dashboardSwitch\",msg.payload);\n\nmsg.payload = global.get(\"dashboardSwitch\");\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 800,
+        "y": 100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7d413f946c643c16",
+        "type": "function",
+        "z": "9fb621d8b4c2dd02",
+        "name": "SetRollerContorl",
+        "func": "global.set(\"rollerSlider\",msg.payload);\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 780,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a0bee660b5232cb2",
+        "type": "function",
+        "z": "9fb621d8b4c2dd02",
+        "name": "SetLightContorl",
+        "func": "global.set(\"lightSwitch\",msg.payload);\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 780,
+        "y": 220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "de589eddbd640cf0",
+        "type": "function",
+        "z": "9fb621d8b4c2dd02",
+        "name": "InputFunction",
+        "func": "var dashboardSwitch = global.get(\"dashboardSwitch\");  // 从 Switch 控件获取值\nvar lightSwitch = global.get(\"lightSwitch\");  // 从另一个 Switch 控件获取值\nvar rollerSlider = global.get(\"rollerSlider\");  // 从滑块控件获取值\n\n// 构建要发送到 IoT 设备模块的消息\nvar message = {\n    dashboardSwitch: dashboardSwitch,\n    lightSwitch: lightSwitch,\n    rollerSlider: rollerSlider\n};\n\n// 将消息发送到 IoT 设备模块\nmsg.payload = message;\nmsg.topic = \"telemetry\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "// 部署节点后，此处添加的代码将运行一次。 \nglobal.set(\"dashboardSwitch\", 0);\nglobal.set(\"lightSwitch\", 0);\nglobal.set(\"rollerSlider\", 0);",
+        "finalize": "",
+        "libs": [],
+        "x": 220,
+        "y": 300,
+        "wires": [
+            [
+                "d83d4f251fc44a6b",
+                "2cf027ae9e824a3f"
+            ]
+        ]
+    },
+    {
+        "id": "c8c052a00b2d735b",
+        "type": "debug",
+        "z": "9fb621d8b4c2dd02",
+        "name": "LightStatusLog",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1160,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "111e28455fb674f2",
+        "type": "ui_led",
+        "z": "9fb621d8b4c2dd02",
+        "order": 6,
+        "group": "d6e62d9ad3927827",
+        "width": 6,
+        "height": 2,
+        "label": "",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#ff0000",
+                "value": "false",
+                "valueType": "bool"
+            },
+            {
+                "color": "#008000",
+                "value": "true",
+                "valueType": "bool"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": true,
+        "name": "Light status",
+        "x": 1150,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "bd7a827067560ef1",
+        "type": "ui_gauge",
+        "z": "9fb621d8b4c2dd02",
+        "name": "Roller status",
+        "group": "d6e62d9ad3927827",
+        "order": 7,
+        "width": 6,
+        "height": 6,
+        "gtype": "gage",
+        "title": "Roller status",
+        "label": "",
+        "format": "{{msg.payload.light_value}}",
+        "min": "0",
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#592ef5"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 1150,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "d6e62d9ad3927827",
+        "type": "ui_group",
+        "name": "Dashboard for Smartroom",
+        "tab": "26b8e65a2f2daf06",
+        "order": 1,
+        "disp": true,
+        "width": 12,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "26b8e65a2f2daf06",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    }
+]

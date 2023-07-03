@@ -1,7 +1,7 @@
 #include "RollerTask.h"
 using namespace std;
 
-DataForRoller serialData;
+DataForRoller data;
 
 RollerTask::RollerTask() {
 
@@ -28,7 +28,7 @@ void RollerTask::tick() {
     case AUTO_MODE:
         modechar = 's';
         if( hour_now>=8 && hour_now<19 && data.detectStatus == 1 && roller->getStatus()!=0)    roller->setValue(0);
-        if( (hour_now>=19||hour_now<8) && data.detectStatus == 0 && roller->getStatus()!=100)   roller->setValue(100);
+        if( (hour_now>=19||hour_now<8) && data.detectStat   us == 0 && roller->getStatus()!=100)   roller->setValue(100);
         break;
     
     case PC_MODE:
@@ -42,10 +42,6 @@ void RollerTask::tick() {
         break;
     }
 
-}
-
-struct DataForNode getDataFromSerial(){
-    return serialData;
 }
 
 

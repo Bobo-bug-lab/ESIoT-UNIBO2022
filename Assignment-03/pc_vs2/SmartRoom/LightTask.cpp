@@ -1,4 +1,5 @@
 #include "LightTask.h"
+#include "RollerTask.h"
 #include <iostream>
 // #include "WaterLevelTask.h"
 
@@ -26,7 +27,8 @@ void LightTask::init(int period){
 }
   
 void LightTask::tick(){
-  int volt_light_detected;
+  int hour_now = timer->getCurrentHour();
+  double volt_light_detected;
   dataForLight = getDataForLight();
     // std::cout << "dashboardSwitch: " << dataForLight.dashboardSwitch << std::endl;
     // std::cout << "detectStatus: " << dataForLight.detectStatus << std::endl; 
@@ -38,8 +40,9 @@ void LightTask::tick(){
   switch (controlMode)
   {
   case PC_MODE:
-
+  
     std::cout << "PC_MODE running " <<std::endl;
+    modechar = 's';
     if(dataForLight.lightSwitchNode)  led->switchOn();
       else if (!dataForLight.lightSwitchNode) led->switchOff();
     roller->setValue(dataForLight.rollerSliderValueNode);

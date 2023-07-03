@@ -24,6 +24,7 @@ private:
     HANDLE hSerial;
     bool Read(char* buffer, DWORD bufferSize, DWORD& bytesRead);
     bool Write(ControlMode mode, bool led, int roller);
+    // bool Write(char mode, char msg);
 };
 
 struct FromArduinoData {

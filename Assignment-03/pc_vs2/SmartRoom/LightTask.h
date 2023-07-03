@@ -24,6 +24,7 @@ private:
   // time when light turned on
   void setDataForRoller(int value);
   long time_when_light_turned_on;
+  char modeChar;
 
 public:
 

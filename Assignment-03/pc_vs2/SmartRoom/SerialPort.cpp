@@ -78,6 +78,8 @@ struct FromPhoneData fromPhoneData;
         return lastTimeSync;
     }
 
+    
+
     // void SerialPort::setPhoneData(){
     //     dataforlight.dashboardSwitch = this->getDashboardSwitch();
     //     dataforlight.detectStatus = this->getDetectStatus();

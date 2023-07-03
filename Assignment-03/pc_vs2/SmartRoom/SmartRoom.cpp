@@ -9,6 +9,7 @@
 #include "IotTask.h"
 #include "LightTask.h"
 #include "RollerTask.h"
+#include "SerialPort.h"
 
 
 using namespace std;
@@ -22,13 +23,13 @@ void init_system() {
     sched->init(100);
     Task* t0 = new IotTask();
     Task* t1 = new LightTask();
-    Task* t2 = new RollerTask();
+    //Task* t2 = new RollerTask();
     t0->init(100);
     sched->addTask(t0);
     t1->init(100);
     sched->addTask(t1);
-    t2->init(100);
-    sched->addTask(t2);
+    // t2->init(100);
+    // sched->addTask(t2);
     timer->setupPeriod(50);
 }
 
