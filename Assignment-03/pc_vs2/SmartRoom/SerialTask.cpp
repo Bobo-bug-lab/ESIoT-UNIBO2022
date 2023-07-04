@@ -29,7 +29,7 @@ void SerialTask::init(int period) {
 void SerialTask::tick() {
 
     char messageBody[10] = "\0";
-    //globalSerial.readString(messageBody, '\n', 20, 2000);
+    globalSerial.readString(messageBody, '\n', 20, 2000);
     printf("String read: %s\n", messageBody);
     this->parseInputChar(messageBody);
 

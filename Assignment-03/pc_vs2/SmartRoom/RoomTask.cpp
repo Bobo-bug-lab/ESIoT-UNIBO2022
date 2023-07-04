@@ -37,18 +37,18 @@ void RoomTask::tick(){
   {
   case PC_MODE:
   
-    std::cout << "PC_MODE running " <<std::endl;
+    std::cout << "PC_MODE running" <<std::endl;
     modeChar = 'd';
-    // if(dataForLight.lightSwitchNode != led->getStatus())
-    // {
+    if(dataForLight.lightSwitchNode != led->getStatus())
+    {
       if(dataForLight.lightSwitchNode)  led->switchOn(modeChar);    //execute when changing
         else if (!dataForLight.lightSwitchNode) led->switchOff(modeChar);
-    //}
+    }
 
-    //if(dataForLight.rollerSliderValueNode != roller->getValue()) //execute when changing
-    //{
+    if(dataForLight.rollerSliderValueNode != roller->getValue()) //execute when changing
+    {
       roller->setValue(modeChar,dataForLight.rollerSliderValueNode);
-    //}
+    }
     
     //send order of light_status and roller_tatus from Arduino
     //get data of light_status and roller_status from Arduino
@@ -56,8 +56,8 @@ void RoomTask::tick(){
     //dataForNode.lightStatus = dataForLight.lightSwitchNode;// get status from arduino instead of node, or a flag from arduino
     //dataForNode.rollerStatus = dataForLight.rollerSliderValueNode;//these two lines of codes only for testing
 
-    dataForNode.lightStatus = led->getStatus();// get status from arduino instead of node, or a flag from arduino
-    dataForNode.rollerStatus = roller->getValue();//these two lines of codes only for testing
+    dataForNode.lightStatus = led->getStatus();
+    dataForNode.rollerStatus = roller->getValue();
     
     //std::cout << "lightStatus on PC: " << dataForNode.lightStatus << std::endl;
 
