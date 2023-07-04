@@ -178,12 +178,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\getC2Dms.cpp" />
+    <ClCompile Include="..\globalSerial.cpp" />
     <ClCompile Include="..\IotTask.cpp" />
     <ClCompile Include="..\Led.cpp" />
-    <ClCompile Include="..\LightTask.cpp" />
     <ClCompile Include="..\Roller.cpp" />
+    <ClCompile Include="..\RoomTask.cpp" />
     <ClCompile Include="..\Scheduler.cpp" />
     <ClCompile Include="..\sendD2Cms.cpp" />
+    <ClCompile Include="..\serialib.cpp" />
+    <ClCompile Include="..\SerialTask.cpp" />
     <ClCompile Include="..\SmartRoom.cpp" />
     <ClCompile Include="..\test\Air.cpp" />
     <ClCompile Include="..\test\Pir.cpp" />
@@ -193,13 +196,16 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\getC2Dms.h" />
+    <ClInclude Include="..\globalSerial.h" />
     <ClInclude Include="..\IotTask.h" />
     <ClInclude Include="..\Led.h" />
     <ClInclude Include="..\Light.h" />
-    <ClInclude Include="..\LightTask.h" />
     <ClInclude Include="..\Roller.h" />
+    <ClInclude Include="..\RoomTask.h" />
     <ClInclude Include="..\Scheduler.h" />
     <ClInclude Include="..\sendD2Cms.h" />
+    <ClInclude Include="..\serialib.h" />
+    <ClInclude Include="..\SerialTask.h" />
     <ClInclude Include="..\Task.h" />
     <ClInclude Include="..\test\Air.h" />
     <ClInclude Include="..\test\Pir.h" />

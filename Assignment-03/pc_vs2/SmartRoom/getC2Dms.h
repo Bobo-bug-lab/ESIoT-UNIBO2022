@@ -21,7 +21,7 @@ public:
     IOTHUB_DEVICE_CLIENT_LL_HANDLE endService();
     //IOTHUB_DEVICE_CLIENT_LL_HANDLE sync();
     bool getDetectStatus();
-    int getLightValue();
+    double getLightValue();
     bool getDashboardSwitch();
     bool getLightSwitchNode();
     int getRollerSliderValueNode();

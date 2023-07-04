@@ -12,13 +12,12 @@
 #include "parson.h"
 #include "sendD2Cms.h"
 #include "Timer.h"
-#include "LightTask.h"
+#include "RoomTask.h"
 
     DataForNode data;
 
     IoTHubDeviceSend::IoTHubDeviceSend(const char* connectionString) {
         this->connectionString = connectionString;
-        //HostName=bobofan-iothub.azure-devices.net;DeviceId=pcsend;SharedAccessKey=CXMG+euGW7CHqXuSJw1W++VhUabg+UMg56KArB+d43M=
     }
 
     void IoTHubDeviceSend::startService() {
@@ -51,8 +50,9 @@
     void IoTHubDeviceSend::sync(){
             //this->rollerStatus++;
             data = getDataForNode();
-            std::cout << "lightStatus on send: " << data.lightStatus << std::endl;
+            std::cout << "light status on send: " << data.lightStatus << std::endl;
             sendD2CMessage(data.lightStatus, data.rollerStatus);
+            std::cout << "roller status on send: " << data.rollerStatus << std::endl;
             updateSyncTime(millis());
 
     }

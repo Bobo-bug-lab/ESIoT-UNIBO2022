@@ -1,4 +1,5 @@
 ﻿D:\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(517,5): warning MSB8028: 中间目录(x64\Debug\)包含从另一个项目(iothub_ll_c2d_sample.vcxproj)共享的文件。   这会导致错误的清除和重新生成行为。
-  sendD2Cms.cpp
-E:\EIT\courses\iot\Assignments\Assignment-03\pc_vs2\SmartRoom\sendD2Cms.cpp(1,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+  SerialTask.cpp
+  SmartRoom.cpp
+  正在生成代码...
   iothub_ll_c2d_sample.vcxproj -> E:\EIT\courses\iot\Assignments\Assignment-03\pc_vs2\SmartRoom\windows\x64\Debug\SmartRoom.exe

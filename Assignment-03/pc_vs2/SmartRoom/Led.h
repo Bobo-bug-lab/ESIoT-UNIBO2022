@@ -1,19 +1,23 @@
 #ifndef __LED__
 #define __LED__
 
-#include "Light.h"
-#include "SerialPort.h"
+#include <cstring>
+//#include "Light.h"
+#include "serialib.h"
+#include "globalSerial.h"
+#include "SerialTask.h"
 
-class Led: public Light { 
+
+class Led{ 
 public:
   Led();
-  void switchOn();
-  void switchOff();
-  void getLedToArduino();    
+  void switchOn(char mode_now);
+  void switchOff(char mode_now);
   bool getStatus();
  
 private:
-  bool ledToArduino;
+  bool status;
+  
 };
 
 #endif

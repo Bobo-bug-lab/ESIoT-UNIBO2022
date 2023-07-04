@@ -87,7 +87,7 @@ struct DataForLight dataforlight;
     bool IoTHubDevice::getDetectStatus() {
         return this->detectStatus;
     }
-    int IoTHubDevice::getLightValue() {
+    double IoTHubDevice::getLightValue() {
         return this->lightValue;
     }
     bool IoTHubDevice::getDashboardSwitch() {

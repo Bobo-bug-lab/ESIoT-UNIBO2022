@@ -4,12 +4,10 @@
 #include <iostream>
 #include <windows.h>
 #include "Scheduler.h"
-//#include "getC2Dms.h"
-//#include "../Assignment-03/pc_vs2/SmartRoom/test/TestTask.h"
 #include "IotTask.h"
-#include "LightTask.h"
-#include "RollerTask.h"
-#include "SerialPort.h"
+#include "RoomTask.h"
+#include "SerialTask.h"
+
 
 
 using namespace std;
@@ -21,15 +19,15 @@ void init_system() {
     sched = new Scheduler;
     timer = new Timer;
     sched->init(100);
-    Task* t0 = new IotTask();
-    Task* t1 = new LightTask();
-    //Task* t2 = new RollerTask();
-    t0->init(100);
+    Task* t0 = new SerialTask();
+    Task* t1 = new IotTask();
+    Task* t2 = new RoomTask();
+    t0->init(300);
     sched->addTask(t0);
-    t1->init(100);
+    t1->init(200);
     sched->addTask(t1);
-    // t2->init(100);
-    // sched->addTask(t2);
+    t2->init(200);
+    sched->addTask(t2);
     timer->setupPeriod(50);
 }
 
