@@ -47,7 +47,7 @@ void SerialTask::parseInputChar(const char* input) {
     // Iterate through the input character by character
     for (int i = 0; input[i] != '\0'; i++) {
         char currentChar = input[i];
-
+        std::cout << "Current Char: " << currentChar << std::endl;
         // Check the current character to determine the parsing logic
         if (currentChar == 'S' || currentChar == 'D' || currentChar == 'A') {
             mode = currentChar;
@@ -63,7 +63,7 @@ void SerialTask::parseInputChar(const char* input) {
                 value = value * 10 + (currentChar - '0');
                 valueDigitCount++;
             }
-        } else if (currentChar == '\n') {
+        } else{
             // Perform operations based on the extracted information
             if (mode == 'S') {
                 phoneControl = 1;
@@ -86,9 +86,6 @@ void SerialTask::parseInputChar(const char* input) {
             value = 0;
             valueDigitCount = 0;
             parsingValue = false;
-        } else {
-            std::cout << "Invalid character found in input: " << currentChar << std::endl;
-            break;
         }
     }
 

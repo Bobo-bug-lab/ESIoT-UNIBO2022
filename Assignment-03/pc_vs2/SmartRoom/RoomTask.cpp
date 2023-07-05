@@ -85,6 +85,7 @@ void RoomTask::tick(){
 
     switch (state){// this is the state for light    
       case OFF:
+        std::cout << "Light State OFF"<< std::endl;
         // check if people detected
         if (dataForLight.detectStatus){ 
           std::cout << "People detected"<< std::endl;

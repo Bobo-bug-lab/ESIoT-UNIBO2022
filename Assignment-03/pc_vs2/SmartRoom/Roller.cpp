@@ -29,7 +29,7 @@ int Roller::getValue(){
   //do something
   //vaild in all status
   this->value = getRollerFromSerial();
-  std::cout << "Roller get status "<< this->value << std::endl;
+  std::cout << "Roller get value "<< this->value << std::endl;
   return this->value;
 }
 

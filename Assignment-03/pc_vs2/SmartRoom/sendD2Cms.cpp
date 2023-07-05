@@ -14,7 +14,7 @@
 #include "Timer.h"
 #include "RoomTask.h"
 
-    DataForNode data;
+    DataForNode data = {0,0,0};
 
     IoTHubDeviceSend::IoTHubDeviceSend(const char* connectionString) {
         this->connectionString = connectionString;
@@ -48,12 +48,17 @@
     }
 
     void IoTHubDeviceSend::sync(){
-            //this->rollerStatus++;
-            data = getDataForNode();
+            //see if data changed
+        DataForNode newdata = getDataForNode();
+        if(newdata.lightStatus!=data.lightStatus || newdata.rollerStatus!=data.rollerStatus)
+        {
+            std::cout << "New data going to cloud" << std::endl;
+            data = newdata;
             std::cout << "light status on send: " << data.lightStatus << std::endl;
             sendD2CMessage(data.lightStatus, data.rollerStatus);
             std::cout << "roller status on send: " << data.rollerStatus << std::endl;
             updateSyncTime(millis());
+        }
 
     }
 
