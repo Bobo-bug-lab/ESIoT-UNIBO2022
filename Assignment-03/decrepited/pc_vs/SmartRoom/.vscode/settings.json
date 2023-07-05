@@ -1,6 +1,0 @@
-{
-    "files.associations": {
-        "shared_util_options.h": "c",
-        "threadapi.h": "c"
-    }
-}
