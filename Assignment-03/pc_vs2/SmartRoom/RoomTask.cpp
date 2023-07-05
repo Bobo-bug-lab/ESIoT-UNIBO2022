@@ -7,8 +7,6 @@
 DataForLight dataForLight;
 DataForNode dataForNode;
 
-//bool phoneControlSwitch = 0;
-
 RoomTask::RoomTask(){
 
 }
@@ -30,8 +28,8 @@ void RoomTask::tick(){
   int hour_now = timer->getCurrentHour();
   double volt_light_detected;
   dataForLight = getDataForLight();
-  controlMode = switchControlMode(dataForLight.dashboardSwitch,0);
-  //controlMode = switchControlMode(dataForLight.dashboardSwitch,getControlFromSerial());
+  //controlMode = switchControlMode(dataForLight.dashboardSwitch,0);
+  controlMode = switchControlMode(dataForLight.dashboardSwitch,getControlFromSerial());
 
   switch (controlMode)
   {
@@ -41,11 +39,11 @@ void RoomTask::tick(){
     modeChar = 'd';
     if(dataForLight.lightSwitchNode != led->getStatus())
     {
-      if(dataForLight.lightSwitchNode)  led->switchOn(modeChar);    //execute when changing
+      if(dataForLight.lightSwitchNode)  led->switchOn(modeChar);    //execute when LED changing
         else if (!dataForLight.lightSwitchNode) led->switchOff(modeChar);
     }
 
-    if(dataForLight.rollerSliderValueNode != roller->getValue()) //execute when changing
+    if(dataForLight.rollerSliderValueNode != roller->getValue()) //execute when ROLLER changing
     {
       roller->setValue(modeChar,dataForLight.rollerSliderValueNode);
     }
@@ -59,9 +57,6 @@ void RoomTask::tick(){
     dataForNode.lightStatus = led->getStatus();
     dataForNode.rollerStatus = roller->getValue();
     
-    //std::cout << "lightStatus on PC: " << dataForNode.lightStatus << std::endl;
-
-    //get light and roller status from the arduino
     break;
 
   case PHONE_MODE:  //phone give back order only in PHONE_MODE, give back status in all 3 modes.
@@ -71,7 +66,6 @@ void RoomTask::tick(){
     // get data of light status and roller status from Arduino
     dataForNode.lightStatus = led->getStatus();
     dataForNode.rollerStatus = roller->getValue();// data from arduino
-    // send data to node-red
 
    break;
   
@@ -122,7 +116,8 @@ void RoomTask::tick(){
         state = OFF;
         break;
       }
-
+      
+    // send data to node-red
     dataForNode.lightStatus = led->getStatus();
     dataForNode.rollerStatus = roller->getValue();// data from arduino
     break;
