@@ -1,3 +1,4 @@
 # VS cache files
 
 *.opendb
+.vscode/*
